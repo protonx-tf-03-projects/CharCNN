@@ -10,9 +10,9 @@ Our porject is using TensorFlow framework to implement CharCNN model to classify
 
 Slide about your project (if it's available) <--- **FIXME**
 
-<p align="center">
-    <img src='https://www.google.com/url?sa=i&url=https%3A%2F%2Fmedium.com%2F%40surmenok%2Fcharacter-level-convolutional-networks-for-text-classification-d582c0c36ace&psig=AOvVaw3gusOTEX07meYs1kFpGfnr&ust=1628413784148000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCKCx7pvInvICFQAAAAAdAAAAABAj' width=200 class="center">
-</p>
+### Model Architecture
+
+![](image/CharCNN-architecture2.png)
 
 
 
