@@ -1,4 +1,4 @@
-# Project Name <--- FIXME
+# CharCNN <--- FIXME
 
 Library Logo <--- **FIXME**
 
