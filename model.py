@@ -13,13 +13,14 @@ class CharCNN():
         if feature == 'small':
             self.units_fc = 1024
             self.num_filter = 256
+            self.stddev = 0.05
         else:
             self.units_fc = 2048
             self.num_filter = 1024
-        
+            self.stddev = 0.02
         self.embedding = Embedding(input_dim=vocab_szie, output_dim= embedding_dim, input_length= max_lenght )
-        self.conv1d7 = Conv1D(filters= self.num_filter, kernel_size= 7, padding= padding,kernel_initializer= tf.keras.initializers.RandomNormal(mean = 0., stddev=  0.05, seed= None))
-        self.conv1d3 = Conv1D(filters= self.num_filter, kernel_size= 3, padding= padding,kernel_initializer= tf.keras.initializers.RandomNormal(mean = 0., stddev=  0.05, seed= None))
+        self.conv1d7 = Conv1D(filters= self.num_filter, kernel_size= 7, padding= padding,kernel_initializer= tf.keras.initializers.RandomNormal(mean = 0., stddev= self.stddev, seed= None))
+        self.conv1d3 = Conv1D(filters= self.num_filter, kernel_size= 3, padding= padding,kernel_initializer= tf.keras.initializers.RandomNormal(mean = 0., stddev= self.stddev, seed= None))
         self.maxpool1d = MaxPooling1D(pool_size= 3, strides= 1)
         self.fc = Dense(self.units_fc,activation= 'relu')
     def call(self, data):
