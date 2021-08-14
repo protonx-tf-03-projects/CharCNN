@@ -2,9 +2,7 @@ import numpy as np
 import tensorflow as tf
 from tensorflow.keras.layers import * 
 
-
-
-class CharCNN():
+class CharCNN(tf.keras.models.Model):
     def __init__(self,vocab_szie = 10000, embedding_size = 64, max_lenght = 2000, num_classes = 10,feature = 'small',padding = 'same'):
         super(CharCNN,self).__init__()
         self.num_classes = num_classes
