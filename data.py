@@ -7,10 +7,6 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tqdm import tqdm
 
 class Dataset:
-    # def __init__(self, texts, labels, test_size):
-        # self.texts = np.array(texts)
-        # self.labels = np.array(labels)
-        # self.test_size = test_size
     def __init__(self, test_size):
         self.test_size = test_size 
         self.tokenizer = None 
@@ -45,7 +41,7 @@ class Dataset:
         return tensor 
 
     def get_max_len(self, texts):
-        return max([len(sentence) for sentence in texts])
+        return max([len(sentence.split()) for sentence in texts])
 
     def load_dataset(self, data_path, text_column, label_column):
 
@@ -63,6 +59,7 @@ class Dataset:
     
     def build_dataset(self, data_path, text_column, label_column):
         dataset, label_dataset = self.load_dataset(data_path, text_column, label_column)
+        print(dataset[0])
         # split data 
         size = int(len(dataset) * (1 - self.test_size)) 
         self.x_train = dataset[:size]

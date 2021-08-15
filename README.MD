@@ -36,7 +36,7 @@ conda env create -f environment.yml
 
 ```
 
-- Step 3: <--- **FIXME**
+- Step 3: <--- **FIXMEE**
 
 ```
 
