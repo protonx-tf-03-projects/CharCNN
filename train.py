@@ -4,6 +4,7 @@ from data import Dataset
 import pandas as pd 
 from model import *
 from tensorflow.keras.optimizers import *
+import urllib.request
 tf.config.experimental_run_functions_eagerly(True)
 if __name__ == "__main__":
     parser = ArgumentParser()
@@ -39,6 +40,8 @@ if __name__ == "__main__":
     print('===========================')
 
     # Load data 
+    print("-------------TRAINING DATA------------")
+   
     data_path = "IMDB Dataset.csv"
     text_column = "review"
     label_column = "sentiment"
