@@ -51,7 +51,7 @@ class Dataset:
         )
 
         dataset = datastore[text_column].tolist()
-        label_dataset = datastore[label_column].tolist()
+        label_dataset = datastore[label_column].apply(lambda x: 1 if x=="positive" else 0).tolist()
 
         dataset = [self.preprocess_data(text) for text in dataset]
 
@@ -59,20 +59,20 @@ class Dataset:
     
     def build_dataset(self, data_path, text_column, label_column):
         dataset, label_dataset = self.load_dataset(data_path, text_column, label_column)
-        print(dataset[0])
+        
         # split data 
         size = int(len(dataset) * (1 - self.test_size)) 
         self.x_train = dataset[:size]
         self.x_val = dataset[size:]
-        self.y_train = label_dataset[:size]
-        self.y_val = label_dataset[size:]
+        self.y_train = np.array(label_dataset[:size])
+        self.y_val = np.array(label_dataset[size:])
         self.vocab_size = len(self.x_train)
         # build tokenizer 
         self.tokenizer = self.build_tokenizer(self.x_train, self.vocab_size)
         # get max_len 
         self.max_len = self.get_max_len(self.x_train)
         # tokenizing 
-        self.x_train = self.tokenize(self.tokenizer, self.x_train, self.max_len)
-        self.x_val = self.tokenize(self.tokenizer,self.x_val, self.max_len)
+        self.x_train = np.array(self.tokenize(self.tokenizer, self.x_train, self.max_len))
+        self.x_val = np.array(self.tokenize(self.tokenizer,self.x_val, self.max_len))
 
         return self.x_train, self.x_val, self.y_train, self.y_val
