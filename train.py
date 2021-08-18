@@ -48,13 +48,5 @@ if __name__ == "__main__":
     imdbd_dataset = Dataset(test_size=args.test_size)
     x_train, x_val, y_train, y_val = imdbd_dataset.build_dataset(data_path, text_column, label_column)
     
-    # small_CharCNN=CharCNN(imdbd_dataset.vocab_size, args.embedding_size, imdbd_dataset.max_len, args.num_classes, "small")
-    # small_CharCNN.compile(optimizer=Adam(args.learning_rate),  loss="sparse_categorical_crossentropy", metrics=["acc"])
-    # small_CharCNN.fit(x_train, y_train,validation_data=(x_val, y_val), epochs=args.epochs)
-    # small_CharCNN.save(args.smallCharCNN_folder)
 
-    # large_CharCNN=CharCNN(imdbd_dataset.vocab_size, args.embedding_size, imdbd_dataset.max_len, args.num_classes, "large")
-    # large_CharCNN.compile(optimizer=Adam(args.learning_rate),  loss="sparse_categorical_crossentropy", metrics=["acc"])
-    # large_CharCNN.fit(x_train, y_train,validation_data=(x_val, y_val), epochs=args.epochs)
-    # large_CharCNN.save(args.largeCharCNN_folder)
    
