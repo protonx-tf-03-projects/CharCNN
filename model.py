@@ -2,7 +2,7 @@ from tensorflow.keras.layers import *
 import tensorflow as tf
 
 class CharCNN(tf.keras.models.Model):
-    def __init__(self,vocab_size,embedding_size,max_length,num_classes,feature = 'small',padding = 'valid'):
+    def __init__(self,vocab_size,embedding_size,max_length,num_classes,feature = 'small',padding = 'same'):
         super(CharCNN,self).__init__()
         assert feature in ['small','large']
         assert padding in ['valid','same']
