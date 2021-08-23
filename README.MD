@@ -98,7 +98,7 @@ Above, they are results of training by CharCNN model vs our custom Bidirectional
 
 When you want to modify the model, you need to run the test to make sure your change does not affect the whole system.
 
-In the `./folder-name` **(FIXME)** folder please run:
+In the `./model/tests` **(FIXME)** folder please run:
 
 ```bash
 pytest
