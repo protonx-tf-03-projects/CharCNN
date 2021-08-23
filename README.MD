@@ -83,7 +83,7 @@ Small CharCNN performance:
 313/313 [==============================] - 2538s 8s/step - loss: 0.0386 - accuracy: 0.9873 - val_loss: 1.6373e-05 - val_accuracy: 1.0000
 ```
 
-Bidirectional LSTM + Dense performance
+Bidirectional LSTM + Dense performance:
 ```
 313/313 [==============================] - 4209s 13s/step - loss: 0.5117 - acc: 0.7398 - val_loss: 0.3425 - val_acc: 0.8650
 ```
