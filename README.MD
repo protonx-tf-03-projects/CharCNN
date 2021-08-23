@@ -1,16 +1,11 @@
 # CharCNN 
 
-Library Logo <--- **FIXME**
-
-<p align="center">
-    <img src='https://storage.googleapis.com/protonx-cloud-storage/transformer/protonx-transf.png' width=200 class="center">
-</p>
-
 Our porject is using TensorFlow framework to implement CharCNN model to classify English sentences. 
 
 ### Model Architecture
-
+![](image/CharCNN-architecture1.png)
 ![](image/CharCNN-architecture2.png)
+
 
 ### Team
 - Team leader:
@@ -22,22 +17,30 @@ Our porject is using TensorFlow framework to implement CharCNN model to classify
     1. Github: bangoc123
 
 ## I.  Set up environment
-- Step 1: <--- **FIXME**
+- Step 1: Clone repo to local
 
-```python
+```bash
+git clone https://github.com/protonx-tf-03-projects/CharCNN.git
+```
+
+- Step 2: Change directory to folder
+```bash
+cd CharCNN
+```
+
+- Step 3: Make sure you have installed Miniconda. If not yet, see the setup document [here](https://conda.io/en/latest/user-guide/install/index.html#regular-installation).
+
+- Step 4: Create environment
+```bash
 conda env create -f environment.yml
-```
-
-- Step 2: <--- **FIXME**
-```
-
-```
-
-- Step 3: <--- **FIXMEE**
-
-```
-
 ``` 
+
+- Step 5: Activate environment
+```bash
+conda activate CharCNN
+```
+
+Congratulation. Now you have environment to use our project.
 
 ## II.  Set up your dataset
 
