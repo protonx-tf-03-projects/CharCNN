@@ -88,7 +88,7 @@ Bidirectional LSTM + Dense performance
 313/313 [==============================] - 4209s 13s/step - loss: 0.5117 - acc: 0.7398 - val_loss: 0.3425 - val_acc: 0.8650
 ```
 
-Above, they are results of training by CharCNN model vs our custom Bidirectional LSTM in only 1 epochs on IMDB Dataset of 50K Movie Reviews. Although when we train to 3 epochs Bi-LSTM model can reach to 97 accuracy in validation data, CharCNN is the model reach to that result faster.
+Above, they are results of training by CharCNN model vs our custom Bidirectional LSTM in only 1 epochs on IMDB Dataset of 50K Movie Reviews. When we train Bi-LSTM model to 3 epochs, it can reach to 97 accuracy in validation data, but CharCNN is the model reach to that result faster in only 1 epoch.
 
 
 ## VI. Running Test
