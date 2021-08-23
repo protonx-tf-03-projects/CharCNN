@@ -78,35 +78,17 @@ python predict.py --test-file test.csv --result-file result.csv
 ```
 ## V. Result and Comparision
 
-**FIXME**
-
-Your implementation
+Small CharCNN performance:
 ```
-Epoch 7/10
-782/782 [==============================] - 261s 334ms/step - loss: 0.8315 - acc: 0.8565 - val_loss: 0.8357 - val_acc: 0.7978
-Epoch 8/10
-782/782 [==============================] - 261s 334ms/step - loss: 0.3182 - acc: 0.8930 - val_loss: 0.6161 - val_acc: 0.8047
-Epoch 9/10
-782/782 [==============================] - 261s 333ms/step - loss: 1.1965 - acc: 0.8946 - val_loss: 3.9842 - val_acc: 0.7855
-Epoch 10/10
-782/782 [==============================] - 261s 333ms/step - loss: 0.4717 - acc: 0.8878 - val_loss: 0.4894 - val_acc: 0.8262
-
+313/313 [==============================] - 2538s 8s/step - loss: 0.0386 - accuracy: 0.9873 - val_loss: 1.6373e-05 - val_accuracy: 1.0000
 ```
 
-**FIXME**
-
-Other architecture
-
+Bidirectional LSTM + Dense performance
 ```
-Epoch 6/10
-391/391 [==============================] - 115s 292ms/step - loss: 0.1999 - acc: 0.9277 - val_loss: 0.4719 - val_acc: 0.8130
-Epoch 7/10
-391/391 [==============================] - 114s 291ms/step - loss: 0.1526 - acc: 0.9494 - val_loss: 0.5224 - val_acc: 0.8318
-Epoch 8/10
-391/391 [==============================] - 115s 293ms/step - loss: 0.1441 - acc: 0.9513 - val_loss: 0.5811 - val_acc: 0.7875
+313/313 [==============================] - 4209s 13s/step - loss: 0.5117 - acc: 0.7398 - val_loss: 0.3425 - val_acc: 0.8650
 ```
 
-Your comments about these results <--- **FIXME**
+Above, they are results of training by CharCNN model vs our custom Bidirectional LSTM in only 1 epochs on IMDB Dataset of 50K Movie Reviews. Although when we train to 3 epochs Bi-LSTM model can reach to 97 accuracy in validation data, CharCNN is the model reach to that result faster.
 
 
 ## VI. Running Test
