@@ -8,21 +8,18 @@ Library Logo <--- **FIXME**
 
 Our porject is using TensorFlow framework to implement CharCNN model to classify English sentences. 
 
-Slide about your project (if it's available) <--- **FIXME**
-
 ### Model Architecture
 
 ![](image/CharCNN-architecture2.png)
 
-
-
-Authors:
-- Github: members github name <--- **FIXME**
-- Email: members emails <--- **FIXME**
-
-Advisors:
-- Github: advisor github name <--- **FIXME**
-- Email: advisor emails <--- **FIXME**
+### Team
+- Team leader:
+    1. Github: hoangcaobao
+- Team members:
+    1. Github: Nguyendat-bit
+    2. Github: aestheteeism
+- Advisor:
+    1. Github: bangoc123
 
 ## I.  Set up environment
 - Step 1: <--- **FIXME**
@@ -44,45 +41,41 @@ conda env create -f environment.yml
 
 ## II.  Set up your dataset
 
-- Guide user how to download your data and set the data pipeline <--- **FIXME**
+- We use data IMBD Dataset of 50K Movie Reviews for training that can be easily found at [here](https://www.kaggle.com/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews)
+- After that, dowload it locally then move this csv file to CharCNN folder without changing name
 - References: [NLP](https://github.com/bangoc123/transformer) and [CV](https://github.com/bangoc123/mlp-mixer)
 
 ## III. Training Process
 
-
-**FIXME**
-
 Training script:
 
-
 ```python
 
-python train.py --epochs ${epochs} --input-lang en --target-lang vi --input-path ${path_to_en_text_file} --target-path ${path_to_vi_text_file}
+python train.py --epochs ${epochs} 
 
 ```
-**FIXME**
-
-Example:
-
+For example: 
 ```python
 
-!python train.py --train-folder ${train_folder} --valid-folder ${valid_folder} --num-classes 2 --patch-size 5 --image-size 150 --lr 0.0001 --epochs 200 --num-heads 12 
+python train.py --epochs 3 
 
-``` 
-**FIXME**
+```
 
-There are some important arguments for the script you should consider when running it:
+Due to the large amount of dataset, we recommend using epochs smaller than 3
 
-- `train-folder`: The folder of training data
-- `valid-folder`: The folder of validation data
-- ...
 
 ## IV. Predict Process
 
-```bash
-python predict.py --test-data ${link_to_test_data}
-```
+You create file csv with 1 column named sentences contain your dataset 
 
+Predict script: 
+```bash
+python predict.py --test-file ${link_to_test_data} --result-file ${name_of_file_contain_result}
+```
+For example:
+```bash
+python predict.py --test-file test.csv --result-file result.csv
+```
 ## V. Result and Comparision
 
 **FIXME**
