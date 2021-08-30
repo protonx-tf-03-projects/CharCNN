@@ -1,4 +1,4 @@
 # Define constant variables
 padding = "post"
-label = "postive"
+label = "positive"
 oov_token="<OOV>"
