@@ -20,8 +20,6 @@ if __name__ == "__main__":
     parser.add_argument("--smallCharCNN-folder", default="smallCharCNN", type=str)
     parser.add_argument("--largeCharCNN-folder", default="largeCharCNN", type=str)
     parser.add_argument("--padding", default="same", type=str)
-    parser.add_argument("--momentum", default=0.9, type=float)
-
 
     home_dir = os.getcwd()
     args = parser.parse_args()
@@ -57,11 +55,11 @@ if __name__ == "__main__":
     loss = tf.keras.losses.SparseCategoricalCrossentropy()
 
     # Optimizer Definition
-    sgd = tf.keras.optimizers.SGD(learning_rate= args.learning_rate, momentum= args.momentum)
+    adam = tf.keras.optimizers.Adam(learning_rate= args.learning_rate)
 
     # Compile optimizer and loss function into models
-    small_CharCNN.compile(optimizer= sgd, loss = loss, metrics  = [metric])
-    large_CharCNN.compile(optimizer= sgd, loss = loss, metrics = [metric])
+    small_CharCNN.compile(optimizer= adam, loss = loss, metrics  = [metric])
+    large_CharCNN.compile(optimizer= adam, loss = loss, metrics = [metric])
 
     # Do Training model
     print("-------------Training Small CharCNN------------")
