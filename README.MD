@@ -103,7 +103,7 @@ Epoch 3/3
 313/313 [==============================] - 2185s 7s/step - loss: 0.1841 - acc: 0.9351 - val_loss: 0.3262 - val_acc: 0.8924
 ```
 
-Above, they are results of training of CharCNN model vs our custom Bidirectional LSTM in 3 epochs on IMDB Dataset of 50K Movie Reviews. CharCNN is not good as LSTM.
+Above, they are results of training of CharCNN model vs our custom Bidirectional LSTM in 3 epochs on IMDB Dataset of 50K Movie Reviews. CharCNN is not good as Bidirectional LSTM.
 
 
 ## VI. Running Test
