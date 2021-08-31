@@ -85,7 +85,12 @@ Now you have sentiment of your sentences in test.csv in result.csv file
 
 Small CharCNN performance:
 ```
-313/313 [==============================] - 2538s 8s/step - loss: 0.0386 - accuracy: 0.9873 - val_loss: 1.6373e-05 - val_accuracy: 1.0000
+Epoch 1/3
+313/313 [==============================] - 1583s 5s/step - loss: 0.6929 - accuracy: 0.5117 - val_loss: 0.6782 - val_accuracy: 0.5392
+Epoch 2/3
+313/313 [==============================] - 1554s 5s/step - loss: 0.3542 - accuracy: 0.8433 - val_loss: 0.2596 - val_accuracy: 0.8948
+Epoch 3/3
+313/313 [==============================] - 1481s 5s/step - loss: 0.1619 - accuracy: 0.9414 - val_loss: 0.2819 - val_accuracy: 0.8902
 ```
 
 Bidirectional LSTM + Dense performance:
@@ -98,7 +103,7 @@ Epoch 3/3
 313/313 [==============================] - 2185s 7s/step - loss: 0.1841 - acc: 0.9351 - val_loss: 0.3262 - val_acc: 0.8924
 ```
 
-Above, they are results of training of CharCNN model vs our custom Bidirectional LSTM in only 1 epochs on IMDB Dataset of 50K Movie Reviews. When we train Bi-LSTM model to 3 epochs, it can reach to 97 accuracy in validation data, but CharCNN is the model reach to that result faster in only 1 epoch.
+Above, they are results of training of CharCNN model vs our custom Bidirectional LSTM in 3 epochs on IMDB Dataset of 50K Movie Reviews. CharCNN is not good as LSTM.
 
 
 ## VI. Running Test
