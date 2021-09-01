@@ -57,19 +57,16 @@ if __name__ == "__main__":
     print("================Predicting================")
     predict=model.predict(test)
     predict=np.argmax(predict, axis=1)
+    predict=predict.astype("O")
 
     #Decode predict
-    result=[]
-    for i in predict:
-        if(i==0):
-            result.append("negtive")
-        else:
-            result.append("positive")
+    predict[predict==0]="negative"
+    predict[predict==1]="positive"
 
     #Save to csv
     data=[]
-    for i in range(0, len(result)):
-        data.append([sentence[0], result[i]])
+    for i in range(0, predict.shape[0]):
+        data.append([sentence[i], predict[i]])
     df=pd.DataFrame(data, columns=[args.test_text_column, "sentiment"])
     df.to_csv(args.result_file, index=False)
     print("End Predicting. Now your result will be in {}".format(args.result_file))
