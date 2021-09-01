@@ -27,7 +27,8 @@ class Dataset:
         clean_text = re.sub(r'^https?:\/\/.*[\r\n]*', '', text, flags=re.MULTILINE)
         return clean_text
     def remove_emoji(self, data):
-        #Remove emoji tag link in texts
+        #Each emoji icon has their unique code
+        #Gather all emoji icon code and remove it in texts
         cleanr= re.compile("["
                            u"\U0001F600-\U0001F64F"  
                            u"\U0001F300-\U0001F5FF"
