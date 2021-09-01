@@ -64,9 +64,7 @@ if __name__ == "__main__":
     predict[predict==1]="positive"
 
     #Save to csv
-    data=[]
-    for i in range(0, predict.shape[0]):
-        data.append([sentence[i], predict[i]])
+    data=np.column_stack((sentence, predict))
     df=pd.DataFrame(data, columns=[args.test_text_column, "sentiment"])
     df.to_csv(args.result_file, index=False)
     print("End Predicting. Now your result will be in {}".format(args.result_file))
