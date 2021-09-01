@@ -46,6 +46,12 @@ Congratulation. Now you have environment to use our project.
 
 - We use data IMBD Dataset of 50K Movie Reviews for training that can be easily found at [here](https://www.kaggle.com/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews)
 - After that, dowload it locally then move this csv file to CharCNN folder without changing name
+- Dataset (csv file) has to follow this structure
+
+| review  |   sentiment     |
+|:---------:|:-------------:|
+| setence |  label |
+| ...           |.... |
 - References: [NLP](https://github.com/bangoc123/transformer) and [CV](https://github.com/bangoc123/mlp-mixer)
 
 ## III. Training Process
