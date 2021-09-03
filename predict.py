@@ -5,6 +5,7 @@ import tensorflow as tf
 import pandas as pd
 from tensorflow.python.keras.layers import embeddings 
 from data import *
+from constant import *
 import numpy as np
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from constant import *
@@ -60,8 +61,8 @@ if __name__ == "__main__":
     predict=predict.astype("O")
 
     #Decode predict
-    predict[predict==0]="negative"
-    predict[predict==1]="positive"
+    predict[predict==0]=label1
+    predict[predict==1]=label
 
     #Save to csv
     data=np.column_stack((sentence, predict))
