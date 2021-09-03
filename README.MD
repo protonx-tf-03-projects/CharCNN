@@ -1,5 +1,7 @@
 # CharCNN 
-
+<p align="center">
+    <img src='image/CharCNNlogo.png' width=250 class="center">
+</p>
 Our porject is using TensorFlow framework to implement CharCNN model to classify English sentences. 
 
 ### Model Architecture
