@@ -8,7 +8,7 @@ Our porject is using TensorFlow framework to implement [CharCNN model](https://a
 ### Model Architecture
 ![](image/CharCNN-architecture1.png)
 <p align="center">
-    <img src='image/CharCNN-architecture2.png' width=400 class="center">
+    <img src='image/CharCNN-architecture2.png' width=500 class="center">
 </p>
 
 This model ultilize convolutional neural network to extract features of sentences.
