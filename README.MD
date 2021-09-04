@@ -10,7 +10,7 @@ Our porject is using TensorFlow framework to implement CharCNN model to classify
     <img src='image/CharCNN-architecture2.png' width=400 class="center">
 </p>
 
-This model ultilize convolutional neural network to extract features of sentences
+This model ultilize convolutional neural network to extract features of sentences.
 ### Team
 - Team leader:
     1. Github: hoangcaobao
