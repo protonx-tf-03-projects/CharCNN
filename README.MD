@@ -60,6 +60,9 @@ Congratulation. Now you have environment to use our project.
 - References: [NLP](https://github.com/bangoc123/transformer) and [CV](https://github.com/bangoc123/mlp-mixer)
 
 ## III. Training Process
+Review training on colab:
+
+<a href=https://colab.research.google.com/drive/1hmEYBX6IP_poOZHUS8lhFJWMKCJeeHTI?usp=sharing&fbclid=IwAR2iWKzGElJMeEMFGfDuHExufT7NqT0SFQVpbVs4qc6Pn9WIdxSP1YUexWM" width=80> </a>
 
 Training script:
 
