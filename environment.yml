@@ -1,0 +1,15 @@
+name: CharCNN
+channels:
+  - defaults
+dependencies:
+  - certifi=2021.5.30
+  - pip=21.1.1
+  - python=3.7.0
+  - setuptools=52.0.0
+  - wheel=0.36.2
+  - pip:
+    - numpy
+    - pandas
+    - sklearn
+    - tensorflow==2.5.0
+prefix: C:\Users\ADMIN\miniconda3\envs\CharCNN

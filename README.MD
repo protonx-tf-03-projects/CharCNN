@@ -1,129 +1,122 @@
 # CharCNN 
-
-Library Logo <--- **FIXME**
-
 <p align="center">
-    <img src='https://storage.googleapis.com/protonx-cloud-storage/transformer/protonx-transf.png' width=200 class="center">
+    <img src='image/CharCNNlogo.png' width=250 class="center">
 </p>
-
 Our porject is using TensorFlow framework to implement CharCNN model to classify English sentences. 
 
-Slide about your project (if it's available) <--- **FIXME**
-
 ### Model Architecture
+![](image/CharCNN-architecture1.png)
+<p align="center">
+    <img src='image/CharCNN-architecture2.png' width=400 class="center">
+</p>
 
-![](image/CharCNN-architecture2.png)
-
-
-
-Authors:
-- Github: members github name <--- **FIXME**
-- Email: members emails <--- **FIXME**
-
-Advisors:
-- Github: advisor github name <--- **FIXME**
-- Email: advisor emails <--- **FIXME**
+This model ultilize convolutional neural network to extract features of sentences
+### Team
+- Team leader:
+    1. Github: hoangcaobao
+- Team members:
+    1. Github: Nguyendat-bit
+    2. Github: aestheteeism
+- Advisor:
+    1. Github: bangoc123
 
 ## I.  Set up environment
-- Step 1: <--- **FIXME**
+- Step 1: Clone repo to local
 
-```python
+```bash
+git clone https://github.com/protonx-tf-03-projects/CharCNN.git
+```
+
+- Step 2: Change directory to folder
+```bash
+cd CharCNN
+```
+
+- Step 3: Make sure you have installed Miniconda. If not yet, see the setup document [here](https://conda.io/en/latest/user-guide/install/index.html#regular-installation).
+
+- Step 4: Create environment
+```bash
 conda env create -f environment.yml
-```
-
-- Step 2: <--- **FIXME**
-```
-
-```
-
-- Step 3: <--- **FIXMEE**
-
-```
-
 ``` 
+
+- Step 5: Activate environment
+```bash
+conda activate CharCNN
+```
+
+Congratulation. Now you have environment to use our project.
 
 ## II.  Set up your dataset
 
-- Guide user how to download your data and set the data pipeline <--- **FIXME**
+- We use data IMBD Dataset of 50K Movie Reviews for training that can be easily found at [here](https://www.kaggle.com/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews)
+- After that, dowload it locally then move this csv file to CharCNN folder without changing name
+- Dataset (csv file) has to follow this structure
+
+| review  |   sentiment     |
+|:---------:|:-------------:|
+| setence |  label |
+| ...           |.... |
 - References: [NLP](https://github.com/bangoc123/transformer) and [CV](https://github.com/bangoc123/mlp-mixer)
 
 ## III. Training Process
 
-
-**FIXME**
-
 Training script:
 
-
 ```python
 
-python train.py --epochs ${epochs} --input-lang en --target-lang vi --input-path ${path_to_en_text_file} --target-path ${path_to_vi_text_file}
+python train.py --epochs ${epochs} 
 
 ```
-**FIXME**
-
-Example:
-
+For example: 
 ```python
 
-!python train.py --train-folder ${train_folder} --valid-folder ${valid_folder} --num-classes 2 --patch-size 5 --image-size 150 --lr 0.0001 --epochs 200 --num-heads 12 
+python train.py --epochs 3 
 
-``` 
-**FIXME**
+```
 
-There are some important arguments for the script you should consider when running it:
+Due to the large amount of dataset, we recommend using epochs smaller than 3
 
-- `train-folder`: The folder of training data
-- `valid-folder`: The folder of validation data
-- ...
 
 ## IV. Predict Process
 
+You create file csv with 1 column named sentences contain your dataset 
+
+Predict script: 
 ```bash
-python predict.py --test-data ${link_to_test_data}
+python predict.py --test-file ${link_to_test_data} --result-file ${name_of_file_contain_result}
 ```
+For example:
+```bash
+python predict.py --test-file test.csv --result-file result.csv
+```
+Now you have sentiment of your sentences in test.csv in result.csv file
 
 ## V. Result and Comparision
 
-**FIXME**
-
-Your implementation
+Small CharCNN performance:
 ```
-Epoch 7/10
-782/782 [==============================] - 261s 334ms/step - loss: 0.8315 - acc: 0.8565 - val_loss: 0.8357 - val_acc: 0.7978
-Epoch 8/10
-782/782 [==============================] - 261s 334ms/step - loss: 0.3182 - acc: 0.8930 - val_loss: 0.6161 - val_acc: 0.8047
-Epoch 9/10
-782/782 [==============================] - 261s 333ms/step - loss: 1.1965 - acc: 0.8946 - val_loss: 3.9842 - val_acc: 0.7855
-Epoch 10/10
-782/782 [==============================] - 261s 333ms/step - loss: 0.4717 - acc: 0.8878 - val_loss: 0.4894 - val_acc: 0.8262
-
+Epoch 1/3
+313/313 [==============================] - 1583s 5s/step - loss: 0.6929 - accuracy: 0.5117 - val_loss: 0.6782 - val_accuracy: 0.5392
+Epoch 2/3
+313/313 [==============================] - 1554s 5s/step - loss: 0.3542 - accuracy: 0.8433 - val_loss: 0.2596 - val_accuracy: 0.8948
+Epoch 3/3
+313/313 [==============================] - 1481s 5s/step - loss: 0.1619 - accuracy: 0.9414 - val_loss: 0.2819 - val_accuracy: 0.8902
 ```
 
-**FIXME**
-
-Other architecture
-
+Bidirectional LSTM + Dense performance:
 ```
-Epoch 6/10
-391/391 [==============================] - 115s 292ms/step - loss: 0.1999 - acc: 0.9277 - val_loss: 0.4719 - val_acc: 0.8130
-Epoch 7/10
-391/391 [==============================] - 114s 291ms/step - loss: 0.1526 - acc: 0.9494 - val_loss: 0.5224 - val_acc: 0.8318
-Epoch 8/10
-391/391 [==============================] - 115s 293ms/step - loss: 0.1441 - acc: 0.9513 - val_loss: 0.5811 - val_acc: 0.7875
+Epoch 1/3
+313/313 [==============================] - 5085s 16s/step - loss: 0.4762 - acc: 0.7655 - val_loss: 0.4360 - val_acc: 0.8097
+Epoch 2/3
+313/313 [==============================] - 4386s 14s/step - loss: 0.2837 - acc: 0.8928 - val_loss: 0.2808 - val_acc: 0.8905
+Epoch 3/3
+313/313 [==============================] - 2185s 7s/step - loss: 0.1841 - acc: 0.9351 - val_loss: 0.3262 - val_acc: 0.8924
 ```
 
-Your comments about these results <--- **FIXME**
+Above, they are results of training of CharCNN model vs our custom Bidirectional LSTM in 3 epochs on IMDB Dataset of 50K Movie Reviews. From that results, CharCNN is not good as Bidirectional LSTM.
 
 
-## VI. Running Test
-
-When you want to modify the model, you need to run the test to make sure your change does not affect the whole system.
-
-In the `./folder-name` **(FIXME)** folder please run:
-
-```bash
-pytest
-```
+## VI. Feedback
+If you meet any issues when using this library, please let us know via the issues submission tab.
 
 
