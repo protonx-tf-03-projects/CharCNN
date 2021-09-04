@@ -6,9 +6,11 @@ Our porject is using TensorFlow framework to implement CharCNN model to classify
 
 ### Model Architecture
 ![](image/CharCNN-architecture1.png)
-![](image/CharCNN-architecture2.png)
+<p align="center">
+    <img src='image/CharCNN-architecture2.png' width=400 class="center">
+</p>
 
-
+This model ultilize convolutional neural network to extract features of sentences
 ### Team
 - Team leader:
     1. Github: hoangcaobao
@@ -111,17 +113,10 @@ Epoch 3/3
 313/313 [==============================] - 2185s 7s/step - loss: 0.1841 - acc: 0.9351 - val_loss: 0.3262 - val_acc: 0.8924
 ```
 
-Above, they are results of training of CharCNN model vs our custom Bidirectional LSTM in 3 epochs on IMDB Dataset of 50K Movie Reviews. CharCNN is not good as Bidirectional LSTM.
+Above, they are results of training of CharCNN model vs our custom Bidirectional LSTM in 3 epochs on IMDB Dataset of 50K Movie Reviews. From that results, CharCNN is not good as Bidirectional LSTM.
 
 
-## VI. Running Test
-
-When you want to modify the model, you need to run the test to make sure your change does not affect the whole system.
-
-In the `./model/tests` folder please run:
-
-```bash
-pytest
-```
+## VI. Feedback
+If you meet any issues when using this library, please let us know via the issues submission tab.
 
 
