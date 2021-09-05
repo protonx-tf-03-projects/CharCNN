@@ -6,7 +6,6 @@
 Our porject is using TensorFlow framework to implement [CharCNN model](https://arxiv.org/abs/1509.01626) to classify English sentences. 
 
 ### Model Architecture
-![](image/CharCNN-architecture1.png)
 <p align="center">
     <img src='image/CharCNN-architecture2.png' width=500 class="center">
 </p>
