@@ -3,14 +3,14 @@
     <img src='image/CharCNNlogo.png' width=200 class="center">
 </p>
 
-Our porject is using TensorFlow framework to implement [CharCNN model](https://arxiv.org/abs/1509.01626) to classify English sentences. 
+Our project is using the TensorFlow framework to implement the [CharCNN model](https://arxiv.org/abs/1509.01626) to classify English sentences. 
 
 ### Model Architecture
 <p align="center">
     <img src='image/CharCNN-architecture2.png' width=500 class="center">
 </p>
 
-This model ultilize convolutional neural network to extract features of sentences.
+This model utilizes a convolutional neural network to extract features of sentences.
 ### Team
 - Team leader:
     1. Github: hoangcaobao
@@ -27,14 +27,14 @@ This model ultilize convolutional neural network to extract features of sentence
 git clone https://github.com/protonx-tf-03-projects/CharCNN.git
 ```
 
-- Step 2: Change directory to folder
+- Step 2: Change directory to the folder
 ```bash
 cd CharCNN
 ```
 
 - Step 3: Make sure you have installed Miniconda. If not yet, see the setup document [here](https://conda.io/en/latest/user-guide/install/index.html#regular-installation).
 
-- Step 4: Create environment
+- Step 4: Create an environment
 ```bash
 conda env create -f environment.yml
 ``` 
@@ -44,17 +44,17 @@ conda env create -f environment.yml
 conda activate CharCNN
 ```
 
-Congratulation. Now you have environment to use our project.
+Congratulation. Now you have the environment to use our project.
 
 ## II.  Set up your dataset
 
 - We use data IMBD Dataset of 50K Movie Reviews for training that can be easily found at [here](https://www.kaggle.com/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews)
-- After that, dowload it locally then move this csv file to CharCNN folder without changing name
-- Dataset (csv file) has to follow this structure
+- After that, download it locally then move this CSV file to the CharCNN folder without changing the name
+- Dataset (CSV file) has to follow this structure
 
 | review  |   sentiment     |
 |:---------:|:-------------:|
-| setence |  label |
+| sentence |  label |
 | ...           |.... |
 - References: [NLP](https://github.com/bangoc123/transformer) and [CV](https://github.com/bangoc123/mlp-mixer)
 
@@ -77,12 +77,12 @@ python train.py --epochs 3
 
 ```
 
-Due to the large amount of dataset, we recommend using epochs smaller than 3
+Due to a large number of datasets, we recommend using epochs smaller than 3
 
 
 ## IV. Predict Process
 
-You create file csv with 1 column named sentences contain your dataset 
+You create a file CSV with 1 column named sentences to contain your dataset 
 
 Predict script: 
 ```bash
@@ -92,7 +92,7 @@ For example:
 ```bash
 python predict.py --test-file test.csv --result-file result.csv
 ```
-Now you have sentiment of your sentences in test.csv in result.csv file
+Now you have the sentiment of your sentences in test.csv in result.csv file
 
 ## V. Result and Comparision
 
@@ -121,5 +121,3 @@ Above, they are results of training of CharCNN model vs our custom Bidirectional
 
 ## VI. Feedback
 If you meet any issues when using this library, please let us know via the issues submission tab.
-
-

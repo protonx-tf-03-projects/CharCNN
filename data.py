@@ -4,6 +4,7 @@ import re
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+from sklearn.utils import shuffle
 from constant import *
 
 class Dataset:
@@ -95,6 +96,9 @@ class Dataset:
         self.x_val = dataset[size:]
         self.y_train = np.array(label_dataset[:size])
         self.y_val = np.array(label_dataset[size:])
+        # shuffle data
+        self.x_train, self.y_train = shuffle(self.x_train, self.y_train, random_state= 0)
+        self.x_val, self.y_val = shuffle(self.x_val, self.y_val, random_state= 0)
         self.vocab_size = len(self.x_train)
         
         # build tokenizer 
