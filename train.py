@@ -9,9 +9,11 @@ from tensorflow.keras.optimizers import *
 tf.config.experimental_run_functions_eagerly(True)
 if __name__ == "__main__":
     parser = ArgumentParser()
-
+    home_dir = os.getcwd()    
     # Arguments users used when running command lines
     parser.add_argument("--batch-size", default=128, type=int)
+    parser.add_argument("--vocab-folder", default= '{}/saved_vocab/CharCNN/'.format(home_dir), type= str)
+    parser.add_argument("--train-file", default= 'IMDB Dataset.csv', type= str)
     parser.add_argument("--epochs", default=3, type=int)
     parser.add_argument("--embedding-size", default=100, type=int)
     parser.add_argument("--test-size", default=0.2, type=float)
@@ -21,7 +23,6 @@ if __name__ == "__main__":
     parser.add_argument("--largeCharCNN-folder", default="largeCharCNN", type=str)
     parser.add_argument("--padding", default="same", type=str)
 
-    home_dir = os.getcwd()
     args = parser.parse_args()
 
     print('---------------------Welcome to CharCNN-------------------')
@@ -39,17 +40,15 @@ if __name__ == "__main__":
     # Load data 
     print("-------------TRAINING DATA------------")
 
-    data_path = data_path
-    text_column = text_column
-    label_column = label_column
-    imdbd_dataset = Dataset(test_size=args.test_size)
-    x_train, x_val, y_train, y_val = imdbd_dataset.build_dataset(data_path, text_column, label_column)
+
+    dataset = Dataset(test_size=args.test_size,vocab_folder= args.vocab_folder)
+    x_train, x_val, y_train, y_val = dataset.build_dataset(args.train_file)
 
     # Initializing models
     # Small-CharCNN
-    small_CharCNN = CharCNN(imdbd_dataset.vocab_size, args.embedding_size, imdbd_dataset.max_len, args.num_classes, feature = "small", padding= args.padding)
+    small_CharCNN = CharCNN(dataset.vocab_size, args.embedding_size, dataset.max_len, args.num_classes, feature = "small", padding= args.padding)
     # Large-CharCNN
-    large_CharCNN = CharCNN(imdbd_dataset.vocab_size, args.embedding_size, imdbd_dataset.max_len, args.num_classes, feature = "large", padding= args.padding)
+    large_CharCNN = CharCNN(dataset.vocab_size, args.embedding_size, dataset.max_len, args.num_classes, feature = "large", padding= args.padding)
 
     # Set up loss function
     loss = tf.keras.losses.SparseCategoricalCrossentropy()

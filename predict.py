@@ -40,19 +40,19 @@ if __name__ == "__main__":
     else:
         model = tf.keras.models.load_model(args.largeCharCNN_folder)
 
-    # Load train data to have some importants parameters
-    data_path = data_path
-    text_column = text_column
-    label_column = label_column
-    imdbd_dataset = Dataset(test_size=args.test_size)
-    x_train, x_val, y_train, y_val = imdbd_dataset.build_dataset(data_path, text_column, label_column)
+    # Loading Tokenizer
+    print('=============Loading Tokenizer================')
+    print('Begin...')
+    dataset = Dataset(test_size=args.test_size)
+    label_dict = dataset.label_dict
+    print('Done!!!')
 
     # Load test sentences 
     sentence = pd.read_csv(args.test_file)
     sentence = np.array(sentence[args.test_text_column])
-    test = [imdbd_dataset.preprocess_data(i) for i in sentence]
-    test = imdbd_dataset.tokenizer.texts_to_sequences(test)
-    test = pad_sequences(test, maxlen=imdbd_dataset.max_len, padding=padding)
+    test = [dataset.preprocess_data(i) for i in sentence]
+    test = dataset.tokenizer.texts_to_sequences(test)
+    test = pad_sequences(test, maxlen=dataset.max_len, padding=padding)
 
     # Preidct
     print("================Predicting================")
@@ -61,9 +61,9 @@ if __name__ == "__main__":
     predict=predict.astype("O")
 
     #Decode predict
-    predict[predict==0]=label1
-    predict[predict==1]=label
-
+    label_dict = dict((i,l) for l,i in label_dict.items())
+    for label_num in label_dict.keys():
+        predict[predict == label_num] = label_dict[label_num]
     #Save to csv
     data=np.column_stack((sentence, predict))
     df=pd.DataFrame(data, columns=[args.test_text_column, "sentiment"])

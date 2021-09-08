@@ -1,6 +1,8 @@
 import numpy as np 
 import pandas as pd 
 import re
+import os 
+import pickle
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
@@ -8,9 +10,17 @@ from sklearn.utils import shuffle
 from constant import *
 
 class Dataset:
-    def __init__(self, test_size):
+    def __init__(self, test_size, vocab_folder):
         self.test_size = test_size 
+        self.vocab_folder = vocab_folder
+        self.save_tokenizer_path = '{}tokenizer.pickle'.format(self.vocab_folder)
+        self.label_dict = None 
         self.tokenizer = None 
+
+        if os.path.isfile(self.save_tokenizer_path):
+            # Loading tokenizer
+            with open(self.save_tokenizer_path, 'rb') as handle:
+                self.tokenizer = pickle.load(handle)
 
     def remove_punc(self, text):
         #Remove punction in a texts
@@ -64,20 +74,21 @@ class Dataset:
         #Get maxlen of texts so we can pad sentences without losing information
         return max([len(sentence.split()) for sentence in texts])
 
-    def load_dataset(self, data_path, text_column, label_column):
+    def load_dataset(self, data_path):
         #Get data and label from file csv using pandas
-        datastore = pd.read_csv(
-            data_path,
-            usecols=[text_column, label_column], 
-        )
-        dataset = datastore[text_column].tolist()
+        datastore = pd.read_csv(data_path)
+        #Rename column names
+        datastore.columns = ['sentence','label']
+
+        dataset = datastore['sentence'].tolist()
         
-        #Change one class to 1 and one class to 0 so it will be more easy to train
-        label_dataset = datastore[label_column].apply(lambda x: 1 if x==label else 0).tolist()
+        #switch to number label
+        self.label_dict = dict((l,i) for i,l in enumerate(set(datastore.label.values)))
+        label_dataset = datastore['label'].apply(lambda x: self.label_dict[x]).tolist()
         dataset = [self.preprocess_data(text) for text in dataset]
         return dataset, label_dataset 
     
-    def build_dataset(self, data_path, text_column, label_column):
+    def build_dataset(self, data_path):
         """
             This function help to build data that we need to train for CharCNN
             Input:
@@ -88,7 +99,7 @@ class Dataset:
                 x_train, x_val, y_train, y_val
                 All data has been cleaned using regex, token, and pad to same length
         """
-        dataset, label_dataset = self.load_dataset(data_path, text_column, label_column)
+        dataset, label_dataset = self.load_dataset(data_path)
      
         # split data 
         size = int(len(dataset) * (1 - self.test_size)) 
@@ -103,7 +114,20 @@ class Dataset:
         
         # build tokenizer 
         self.tokenizer = self.build_tokenizer(self.x_train, self.vocab_size)
-        
+
+        # Saving Tokenizer
+        print('=============Saving Tokenizer================')
+        print('Begin...')
+        if not os.path.exists(self.vocab_folder):
+            try:
+                os.makedirs(self.vocab_folder)
+            except OSError as e:
+                raise IOError("Failed to create folders")
+
+        with open(self.save_tokenizer_path, 'wb') as handle:
+            pickle.dump(self.save_tokenizer_path, handle, protocol= pickle.HIGHEST_PROTOCOL)
+        print('Done!!!')
+
         # get max_len 
         self.max_len = self.get_max_len(self.x_train)
         
