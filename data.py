@@ -100,16 +100,14 @@ class Dataset:
                 All data has been cleaned using regex, token, and pad to same length
         """
         dataset, label_dataset = self.load_dataset(data_path)
-     
+        # shuffle 
+        dataset, label_dataset = shuffle(dataset, label_dataset, random_state = 2111)
         # split data 
         size = int(len(dataset) * (1 - self.test_size)) 
         self.x_train = dataset[:size]
         self.x_val = dataset[size:]
         self.y_train = np.array(label_dataset[:size])
         self.y_val = np.array(label_dataset[size:])
-        # shuffle data
-        self.x_train, self.y_train = shuffle(self.x_train, self.y_train, random_state= 0)
-        self.x_val, self.y_val = shuffle(self.x_val, self.y_val, random_state= 0)
         self.vocab_size = len(self.x_train)
         
         # build tokenizer 
