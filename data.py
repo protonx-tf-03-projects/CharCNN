@@ -1,8 +1,10 @@
 import numpy as np 
 import pandas as pd 
 import re
+import io
 import os 
-import pickle
+import json
+from keras.preprocessing.text import tokenizer_from_json
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
@@ -10,17 +12,23 @@ from sklearn.utils import shuffle
 from constant import *
 
 class Dataset:
-    def __init__(self, test_size, vocab_folder):
-        self.test_size = test_size 
+    def __init__(self, vocab_folder):
         self.vocab_folder = vocab_folder
-        self.save_tokenizer_path = '{}tokenizer.pickle'.format(self.vocab_folder)
+        self.save_tokenizer_path = '{}tokenizer.json'.format(self.vocab_folder)
+        self.save_label_path = 'label.json'
         self.label_dict = None 
         self.tokenizer = None 
 
         if os.path.isfile(self.save_tokenizer_path):
             # Loading tokenizer
-            with open(self.save_tokenizer_path, 'rb') as handle:
-                self.tokenizer = pickle.load(handle)
+            with open(self.save_tokenizer_path) as f:
+                data = json.load(f)
+                self.tokenizer = tokenizer_from_json(data)
+        
+        if os.path.isfile(self.save_label_path):
+            # Loading label_dict
+            with open(self.save_label_path) as f:
+                self.label_dict = json.load(f)
 
     def remove_punc(self, text):
         #Remove punction in a texts
@@ -88,7 +96,7 @@ class Dataset:
         dataset = [self.preprocess_data(text) for text in dataset]
         return dataset, label_dataset 
     
-    def build_dataset(self, data_path):
+    def build_dataset(self, data_path, test_size):
         """
             This function help to build data that we need to train for CharCNN
             Input:
@@ -100,16 +108,14 @@ class Dataset:
                 All data has been cleaned using regex, token, and pad to same length
         """
         dataset, label_dataset = self.load_dataset(data_path)
-     
+        # shuffle
+        dataset, label_dataset = shuffle(dataset, label_dataset, random_state = 2021)
         # split data 
-        size = int(len(dataset) * (1 - self.test_size)) 
+        size = int(len(dataset) * (1 - test_size)) 
         self.x_train = dataset[:size]
         self.x_val = dataset[size:]
         self.y_train = np.array(label_dataset[:size])
         self.y_val = np.array(label_dataset[size:])
-        # shuffle data
-        self.x_train, self.y_train = shuffle(self.x_train, self.y_train, random_state= 0)
-        self.x_val, self.y_val = shuffle(self.x_val, self.y_val, random_state= 0)
         self.vocab_size = len(self.x_train)
         
         # build tokenizer 
@@ -124,9 +130,14 @@ class Dataset:
             except OSError as e:
                 raise IOError("Failed to create folders")
 
-        with open(self.save_tokenizer_path, 'wb') as handle:
-            pickle.dump(self.save_tokenizer_path, handle, protocol= pickle.HIGHEST_PROTOCOL)
+        tokenizer_json = self.tokenizer.to_json()
+        with io.open(self.save_tokenizer_path, 'w', encoding= 'utf-8') as f:
+            f.write(json.dumps(tokenizer_json, ensure_ascii= False))
         print('Done!!!')
+
+        # Saving label dict
+        with open('label.json', 'w') as f:
+            json.dump(self.label_dict, f)
 
         # get max_len 
         self.max_len = self.get_max_len(self.x_train)

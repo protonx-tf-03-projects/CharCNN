@@ -11,13 +11,13 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from constant import *
 if __name__ == "__main__":
     parser = ArgumentParser()
-    parser.add_argument("--test-size", default=0.2, type=float)
+    home_dir = os.getcwd() 
     parser.add_argument("--smallCharCNN-folder", default="smallCharCNN", type=str)
+    parser.add_argument("--vocab-folder", default= '{}/saved_vocab/CharCNN/'.format(home_dir), type= str)
     parser.add_argument("--largeCharCNN-folder", default="largeCharCNN", type=str)
     parser.add_argument("--test-file", default="test.csv", type=str)
     parser.add_argument("--model", default="small", type=str)
     parser.add_argument("--result-file", default="result.csv", type=str)
-    parser.add_argument("--test-text-column", default="sentences", type=str)
     args = parser.parse_args()
 
     print('---------------------Welcome to CharCNN-------------------')
@@ -43,17 +43,18 @@ if __name__ == "__main__":
     # Loading Tokenizer
     print('=============Loading Tokenizer================')
     print('Begin...')
-    dataset = Dataset(test_size=args.test_size)
+    dataset = Dataset(vocab_folder= args.vocab_folder)
     label_dict = dataset.label_dict
     print('Done!!!')
 
     # Load test sentences 
     sentence = pd.read_csv(args.test_file)
-    sentence = np.array(sentence[args.test_text_column])
+    sentence.columns = ['sentence']
+    sentence = np.array(sentence['sentence'])
     test = [dataset.preprocess_data(i) for i in sentence]
     test = dataset.tokenizer.texts_to_sequences(test)
-    test = pad_sequences(test, maxlen=dataset.max_len, padding=padding)
-
+    test = pad_sequences(test, maxlen= model.layers[0].input_length, padding=padding)
+    
     # Preidct
     print("================Predicting================")
     predict=model.predict(test)
@@ -66,7 +67,7 @@ if __name__ == "__main__":
         predict[predict == label_num] = label_dict[label_num]
     #Save to csv
     data=np.column_stack((sentence, predict))
-    df=pd.DataFrame(data, columns=[args.test_text_column, "sentiment"])
+    df=pd.DataFrame(data, columns=['sentence', 'label'])
     df.to_csv(args.result_file, index=False)
     print("End Predicting. Now your result will be in {}".format(args.result_file))
 
