@@ -13,12 +13,12 @@ Our project is using the TensorFlow framework to implement the [CharCNN model](h
 This model utilizes a convolutional neural network to extract features of sentences.
 ### Team
 - Team leader:
-    1. Github: hoangcaobao
+    1. Github: <a href = "https://github.com/hoangcaobao" >hoangcaobao</a>
 - Team members:
-    1. Github: Nguyendat-bit
-    2. Github: aestheteeism
+    1. Github: <a href = "https://github.com/Nguyendat-bit" >Nguyendat-bit</a>
+    2. Github: <a href = "https://github.com/aestheteeism" >aestheteeism</a>
 - Advisor:
-    1. Github: bangoc123
+    1. Github: <a href = "https://github.com/bangoc123" >bangoc123</a>
 
 ## I.  Set up environment
 - Step 1: Clone repo to local
