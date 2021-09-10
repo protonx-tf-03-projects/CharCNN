@@ -67,13 +67,13 @@ Training script:
 
 ```python
 
-python train.py --epochs ${epochs} 
+python train.py --train-file ${link_to_train_data} --epochs ${epochs} 
 
 ```
 For example: 
 ```python
 
-python train.py --epochs 3 
+python train.py --train-file data.csv --epochs 3 
 
 ```
 
