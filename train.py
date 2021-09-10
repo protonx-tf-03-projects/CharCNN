@@ -12,11 +12,12 @@ if __name__ == "__main__":
     home_dir = os.getcwd()    
     # Arguments users used when running command lines
     parser.add_argument("--batch-size", default=128, type=int)
+    parser.add_argument("--mode",default= "small", type= str)
     parser.add_argument("--vocab-folder", default= '{}/saved_vocab/CharCNN/'.format(home_dir), type= str)
     parser.add_argument("--train-file", default= 'data.csv', type= str)
     parser.add_argument("--epochs", default=3, type=int)
     parser.add_argument("--embedding-size", default=100, type=int)
-    parser.add_argument("--test-size", default=0.25, type=float)
+    parser.add_argument("--test-size", default=0.3, type=float)
     parser.add_argument("--num-classes", default=2, type=float)
     parser.add_argument("--learning-rate", default=0.001, type=float)
     parser.add_argument("--smallCharCNN-folder", default="smallCharCNN", type=str)
@@ -41,8 +42,8 @@ if __name__ == "__main__":
     print("-------------TRAINING DATA------------")
 
 
-    dataset = Dataset(test_size=args.test_size,vocab_folder= args.vocab_folder)
-    x_train, x_val, y_train, y_val = dataset.build_dataset(args.train_file)
+    dataset = Dataset(vocab_folder= args.vocab_folder)
+    x_train, x_val, y_train, y_val = dataset.build_dataset(data_path = args.train_file, test_size= args.test_size)
 
     # Initializing models
     # Small-CharCNN
@@ -61,13 +62,15 @@ if __name__ == "__main__":
     large_CharCNN.compile(optimizer= adam, loss = loss, metrics = [metric])
 
     # Do Training model
-    print("-------------Training Small CharCNN------------")
-    small_CharCNN.fit(x_train,y_train,validation_data= (x_val,y_val), epochs= args.epochs, batch_size= args.batch_size, validation_batch_size= args.batch_size)
-    print("----------Finish Training Small CharCNN--------")
-    print("-------------Training Large CharCNN------------")
-    large_CharCNN.fit(x_train,y_train, validation_data= (x_val,y_val), epochs= args.epochs, batch_size = args.batch_size, validation_batch_size = args.batch_size)
-    print("----------Finish Training Large CharCNN--------")
-
-    # Saving models
-    small_CharCNN.save(args.smallCharCNN_folder)
-    large_CharCNN.save(args.largeCharCNN_folder)
+    if args.mode == 'small' or args.mode == 'all':
+        print("-------------Training Small CharCNN------------")
+        small_CharCNN.fit(x_train,y_train,validation_data= (x_val,y_val), epochs= args.epochs, batch_size= args.batch_size, validation_batch_size= args.batch_size)
+        print("----------Finish Training Small CharCNN--------")
+        # Saving models
+        small_CharCNN.save(args.smallCharCNN_folder)
+    if args.mode == 'large' or args.mode == 'all':
+        print("-------------Training Large CharCNN------------")
+        large_CharCNN.fit(x_train,y_train, validation_data= (x_val,y_val), epochs= args.epochs, batch_size = args.batch_size, validation_batch_size = args.batch_size)
+        print("----------Finish Training Large CharCNN--------")
+        # Saving models
+        large_CharCNN.save(args.largeCharCNN_folder)
