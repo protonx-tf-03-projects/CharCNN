@@ -13,7 +13,7 @@ if __name__ == "__main__":
     # Arguments users used when running command lines
     parser.add_argument("--batch-size", default=128, type=int)
     parser.add_argument("--vocab-folder", default= '{}/saved_vocab/CharCNN/'.format(home_dir), type= str)
-    parser.add_argument("--train-file", default= '', type= str)
+    parser.add_argument("--train-file", default= 'data.csv', type= str)
     parser.add_argument("--epochs", default=3, type=int)
     parser.add_argument("--embedding-size", default=100, type=int)
     parser.add_argument("--test-size", default=0.25, type=float)
