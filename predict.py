@@ -13,6 +13,7 @@ if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument("--test-size", default=0.2, type=float)
     parser.add_argument("--smallCharCNN-folder", default="smallCharCNN", type=str)
+    parser.add_argument("--vocab-folder", default= '{}/saved_vocab/CharCNN/'.format(home_dir), type= str)
     parser.add_argument("--largeCharCNN-folder", default="largeCharCNN", type=str)
     parser.add_argument("--test-file", default="test.csv", type=str)
     parser.add_argument("--model", default="small", type=str)
@@ -43,7 +44,7 @@ if __name__ == "__main__":
     # Loading Tokenizer
     print('=============Loading Tokenizer================')
     print('Begin...')
-    dataset = Dataset(test_size=args.test_size)
+    dataset = Dataset(test_size=args.test_size, vocab_folder= args.vocab_folder)
     label_dict = dataset.label_dict
     print('Done!!!')
 
