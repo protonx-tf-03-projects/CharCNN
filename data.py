@@ -108,8 +108,10 @@ class Dataset:
                 All data has been cleaned using regex, token, and pad to same length
         """
         dataset, label_dataset = self.load_dataset(data_path)
-        # shuffle
-        dataset, label_dataset = shuffle(dataset, label_dataset, random_state = 2021)
+        
+        # shuffle 
+        dataset, label_dataset = shuffle(dataset, label_dataset, random_state = 2111)
+      
         # split data 
         size = int(len(dataset) * (1 - test_size)) 
         self.x_train = dataset[:size]

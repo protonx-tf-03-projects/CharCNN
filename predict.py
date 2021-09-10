@@ -44,6 +44,7 @@ if __name__ == "__main__":
     print('=============Loading Tokenizer================')
     print('Begin...')
     dataset = Dataset(vocab_folder= args.vocab_folder)
+
     label_dict = dataset.label_dict
     print('Done!!!')
 
