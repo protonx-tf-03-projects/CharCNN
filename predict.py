@@ -11,6 +11,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from constant import *
 if __name__ == "__main__":
     parser = ArgumentParser()
+    home_dir = os.getcwd() 
     parser.add_argument("--test-size", default=0.2, type=float)
     parser.add_argument("--smallCharCNN-folder", default="smallCharCNN", type=str)
     parser.add_argument("--vocab-folder", default= '{}/saved_vocab/CharCNN/'.format(home_dir), type= str)
